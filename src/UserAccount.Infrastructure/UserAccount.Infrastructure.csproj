@@ -17,8 +17,4 @@
     <ProjectReference Include="..\UserAccount.Domain\UserAccount.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Repository\" />
-  </ItemGroup>
-
 </Project>
