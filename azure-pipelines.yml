@@ -1,15 +1,23 @@
 trigger:
-– master
+  branches:
+    include:
+    - '*'
+variables:
+  system_accesstoken: $(System.AccessToken)
+
 pool:
-  vmImage: 'windows-2019'
+  vmImage: 'ubuntu-latest'
+
 steps:
-– script: |
-    git config –global core.longpaths true
-    git config –global user.email "krystel.menot@gmail.com"
-    git config –global user.name "Ysikael"
-    git checkout master
-    git pull –all
-    git add .
-    git commit -m "sync to azure devops"
-    git push https://$(Azuredevops.Pat)@https:/dev.azure.com/ysikael/LittleBigPlanetRepository.git -f
-  displayName: 'Run git sync'
+- checkout: self
+  persistCredentials: true    #Allow scripts to access the system token
+  clean: true 
+
+- task: shellexec@0
+  inputs:
+    code: |
+      git config --global user.email "xx@xx.com"
+      git config --global user.name "xxx"
+      git branch -r | grep -v '\->' | while read remote; do git branch --track "${remote#origin/}" "$remote"; done
+      git remote add vsts https://xxx.visualstudio.com/GithubSync/_git/GithubSync
+      git branch -r | grep -v '\->' | while read remote; do git -c http.extraheader="AUTHORIZATION: bearer $(system_accesstoken)" push -u vsts "${remote#origin/}"; done
