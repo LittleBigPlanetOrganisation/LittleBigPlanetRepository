@@ -26,8 +26,6 @@ namespace UserAccount.Infrastructure
                 /// 
                 /// </summary>
                 public static readonly string DeleteUserAccount = "createUserAccount";
-                public static readonly string Account = "createUserAccount";
-                public static readonly string UserAccount = "createUserAccount";
             }
 
         }

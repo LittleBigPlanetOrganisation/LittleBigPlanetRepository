@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Options;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 
 namespace UserAccount.Infrastructure.Repository
@@ -29,3 +32,4 @@ namespace UserAccount.Infrastructure.Repository
             _connection = connection?.Value?.LittleBigPlanetData ?? throw new ArgumentNullException(nameof(connection));
         }
     }
+}

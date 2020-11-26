@@ -21,7 +21,7 @@ namespace UserAccount.Api
     {
         private readonly IConfiguration _configuration;
         private readonly IHostEnvironment _environment;
-        // private const int CacheMemorySize = 350000000;
+         private const int CacheMemorySize = 350000000;
 
         public Startup(IHostEnvironment environment, IConfiguration configuration)
         {
