@@ -1,1 +1,15 @@
-
+trigger:
+– master
+pool:
+  vmImage: 'windows-2019'
+steps:
+– script: |
+    git config –global core.longpaths true
+    git config –global user.email "krystel.menot@gmail.com"
+    git config –global user.name "Ysikael"
+    git checkout master
+    git pull –all
+    git add .
+    git commit -m "sync to azure devops"
+    git push https://$(Azuredevops.Pat)@https:/dev.azure.com/ysikael/LittleBigPlanetRepository.git -f
+  displayName: 'Run git sync'
