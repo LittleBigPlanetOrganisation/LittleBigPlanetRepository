@@ -26,9 +26,20 @@ namespace UserAccount.Infrastructure
                 /// 
                 /// </summary>
                 public static readonly string DeleteUserAccount = "createUserAccount";
-                public static readonly string eteUserAccount = "createUserAccount";
             }
 
+        }
+
+        public static class Cache
+        {
+            /// <summary>
+            /// 
+            /// </summary>
+            public static readonly string UserAccountKey = "UserAccount_{0}";
+            /// <summary>
+            /// 
+            /// </summary>
+            public static readonly long UserAccountMediumSize = 200;
         }
     }
 }

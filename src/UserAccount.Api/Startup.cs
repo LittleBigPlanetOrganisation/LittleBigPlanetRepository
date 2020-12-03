@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UserAccount.Infrastructure;
+using UserAccount.Infrastructure.Cache;
 
 namespace UserAccount.Api
 {
@@ -29,7 +30,10 @@ namespace UserAccount.Api
             _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
             services
@@ -39,17 +43,26 @@ namespace UserAccount.Api
 
             var options = Options.Create(new DbClientOptions
             {
-                LittleBigPlanetData = () => new SqlConnection(_configuration.GetConnectionString("LittlebigPlanetData")),
+                LittleBigPlanetData = () => new SqlConnection(_configuration.GetConnectionString("LittleBigPlanetData")),
             });
             services.AddTransient(x => options);
+
+            CacheConfiguration cache = new CacheConfiguration();
+            var cacheSection = _configuration.GetSection("CacheConfiguration");
+            cacheSection.Bind(cache);
+            services.AddMemoryCache(cacheOptions =>
+            {
+                cacheOptions.SizeLimit = long.TryParse(cacheSection["CacheMemorySize"], out var result) ? result : CacheMemorySize;
+            });
+            services.AddTransient(x => cache);
 
             //ProviderConfigurationDictionary configurations = new ProviderConfigurationDictionary();
             //configurations.ProviderConfigurations = GetProvidersConfig();
             //services.AddTransient(x => configurations);
 
             services
-                // .AddCustomSwaggerGen<Startup>()
-                // .AddDefaultHttpClient()
+                .AddCustomSwaggerGen<Startup>()
+                //.AddDefaultHttpClient()
                 .AddResponseCompression()
                 .AddDataProtection();
 
@@ -58,13 +71,42 @@ namespace UserAccount.Api
                 .AddDataAnnotations()
                 .AddAuthorization()
                 .AddApiExplorer()
-                //.AddUnifiedRestApi()
+               // .AddUnifiedRestApi()
                 .AddCors();
 
             // Register Domain handler
             /* services     
                   .AddSingleton<IUserProvider, UserProvider>();
                   .AddSingleton<ISupervisorRepository, SupervisorRepository>(); */
+        }
+
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseBrowserLink();
+                app.UseDeveloperExceptionPage();
+            }
+
+            app.UseHttpsRedirection();
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.UseResponseCompression()
+            .UseCustomSwagger<Startup>()
+            .UseCors(options => options
+                .SetIsOriginAllowed(_ => true)
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
 
         // //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -80,24 +122,5 @@ namespace UserAccount.Api
 
 
         // ////////////////////////////////////////////////ytyryryrtyrtyrt
-
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
-        }
     }
 }
