@@ -29,6 +29,13 @@ namespace UserAccount.Infrastructure.Repository
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="surName"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        Task<UserAccountAllParamDto> GetUserAccountByLogin(string surName, string password);
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="idUser"></param>
         /// <returns></returns>
         Task DeleteUserAccount(long idUser);

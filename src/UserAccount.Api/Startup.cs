@@ -61,7 +61,7 @@ namespace UserAccount.Api
             //services.AddTransient(x => configurations);
 
             services
-                .AddCustomSwaggerGen<Startup>()
+                //.AddCustomSwaggerGen<Startup>()
                 //.AddDefaultHttpClient()
                 .AddResponseCompression()
                 .AddDataProtection();
@@ -96,7 +96,7 @@ namespace UserAccount.Api
             app.UseAuthorization();
 
             app.UseResponseCompression()
-            .UseCustomSwagger<Startup>()
+            //.UseCustomSwagger<Startup>()
             .UseCors(options => options
                 .SetIsOriginAllowed(_ => true)
                 .AllowAnyMethod()
