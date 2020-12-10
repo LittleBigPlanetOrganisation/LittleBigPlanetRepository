@@ -60,7 +60,7 @@ namespace UserAccount.Infrastructure.Repository
                 parameters.Add("@password", dbType: DbType.String, value: param.password);
                 parameters.Add("@isAdmin", dbType: DbType.Boolean, value: param.isAdmin);
                 parameters.Add("@urlPicture", dbType: DbType.String, value: param.urlPicture);
-                parameters.Add("@updateDate", dbType: DbType.DateTime2, value: DateTime.Now);
+                parameters.Add("@updateDate", dbType: DbType.DateTime, value: DateTime.Now);
                 await connection.QueryAsync(
                     Constant.StoredProcedure.UserAccount.CreateUserAccount,
                     parameters,
@@ -88,7 +88,7 @@ namespace UserAccount.Infrastructure.Repository
                 parameters.Add("@email", dbType: DbType.String, value: param.email);
                 parameters.Add("@password", dbType: DbType.String, value: param.password);
                 parameters.Add("@urlPicture", dbType: DbType.String, value: param.urlPicture);
-                parameters.Add("@updateDate", dbType: DbType.DateTime2, value: DateTime.Now);
+              //  parameters.Add("@updateDate", dbType: DbType.DateTime2, value: DateTime.Now);
                 await connection.QueryAsync(
                     Constant.StoredProcedure.UserAccount.SetUserAccount,
                     parameters,
