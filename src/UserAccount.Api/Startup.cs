@@ -56,7 +56,7 @@ namespace UserAccount.Api
 
             services
                 //.AddCustomSwaggerGen<Startup>()
-                //.AddDefaultHttpClient()
+               // .AddDefaultHttpClient()
                 .AddResponseCompression()
                 .AddDataProtection();
 
