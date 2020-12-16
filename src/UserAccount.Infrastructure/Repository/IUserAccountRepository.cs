@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using UserAccount.Domain.UserAccount.Domain.Models;
 using UserAccount.Infrastructure.Dtos;
 
 namespace UserAccount.Infrastructure.Repository
@@ -14,6 +15,7 @@ namespace UserAccount.Infrastructure.Repository
         /// <param name="param"></param>
         /// <returns></returns>
         Task CreateUserWhithAllParam(UserAccountAllParamDto param);
+
         /// <summary>
         /// 
         /// </summary>
@@ -26,6 +28,7 @@ namespace UserAccount.Infrastructure.Repository
         /// <param name="idUser"></param>
         /// <returns></returns>
         Task<IEnumerable<UserAccountAllParamDto>> GetUserAccountById(long idUser);
+
         /// <summary>
         /// 
         /// </summary>
@@ -39,5 +42,6 @@ namespace UserAccount.Infrastructure.Repository
         /// <param name="idUser"></param>
         /// <returns></returns>
         Task DeleteUserAccount(long idUser);
+        
     }
 }

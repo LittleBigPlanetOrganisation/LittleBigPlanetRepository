@@ -7,6 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UserAccount.Domain.UserAccount.Domain.Models;
 using UserAccount.Infrastructure.Cache;
 using UserAccount.Infrastructure.Dtos;
 
@@ -51,7 +52,7 @@ namespace UserAccount.Infrastructure.Repository
                 var parameters = new DynamicParameters();
                 parameters.Add("@idUser", dbType: DbType.Int64, value: param.idUser);
                 parameters.Add("@firstName", dbType: DbType.String, value: param.firstName);
-                parameters.Add("@lastname", dbType: DbType.String, value: param.lastname);
+                parameters.Add("@lastname", dbType: DbType.String, value: param.lastName);
                 parameters.Add("@postalAddress", dbType: DbType.String, value: param.postalAddress);
                 parameters.Add("@postalCode", dbType: DbType.String, value: param.postalCode);
                 parameters.Add("@city", dbType: DbType.String, value: param.city);
@@ -79,7 +80,7 @@ namespace UserAccount.Infrastructure.Repository
                 var parameters = new DynamicParameters();
                 parameters.Add("@idUser", dbType: DbType.Int64, value: param.idUser);
                 parameters.Add("@firstName", dbType: DbType.String, value: param.firstName);
-                parameters.Add("@lastname", dbType: DbType.String, value: param.lastname);
+                parameters.Add("@lastname", dbType: DbType.String, value: param.lastName);
                 parameters.Add("@surName", dbType: DbType.String, value: param.surName);
                 parameters.Add("@postalAddress", dbType: DbType.String, value: param.postalAddress); // pas dans la proc
                 parameters.Add("@postalCode", dbType: DbType.String, value: param.postalCode);       //  pas dans la proc
@@ -175,5 +176,6 @@ namespace UserAccount.Infrastructure.Repository
                 }
             }
         }
+
     }
 }
