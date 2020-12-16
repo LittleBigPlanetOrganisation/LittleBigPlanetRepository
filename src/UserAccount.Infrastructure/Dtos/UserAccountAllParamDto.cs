@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using UserAccount.Domain.UserAccount.Domain.Models;
 
 namespace UserAccount.Infrastructure.Dtos
 {
@@ -8,7 +9,7 @@ namespace UserAccount.Infrastructure.Dtos
     {
         public long idUser { get; set; }
         public string firstName { get; set; }
-        public string lastname { get; set; }
+        public string lastName { get; set; }
         public string surName { get; set; }
         public string postalAddress { get; set; }
         public string postalCode { get; set; }
@@ -19,5 +20,6 @@ namespace UserAccount.Infrastructure.Dtos
         public bool isAdmin { get; set; }
         public string urlPicture { get; set; }
         public DateTime updateDate { get; set; }
+
     }
 }

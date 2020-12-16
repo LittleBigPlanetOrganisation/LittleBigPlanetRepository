@@ -7,6 +7,7 @@ namespace UserAccount.Domain.UserAccount.Domain.Models
 {
    public class UserAccountAllParam //: ValueObject
     {
+
         public long IdUser { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -39,6 +40,11 @@ namespace UserAccount.Domain.UserAccount.Domain.Models
             UpdateDate = updateDate;
         }
 
+
+        public UserAccountAllParam()
+        {
+
+        }
 
         // /////////////////////////////////////////////
 
