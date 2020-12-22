@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using UserAccount.Domain.UserAccount.Domain.Models;
 
 namespace UserAccount.Api.ViewModels
 {
@@ -20,5 +21,6 @@ namespace UserAccount.Api.ViewModels
         public bool IsAdmin { get; set; }
         public string UrlPicture { get; set; }
         public DateTime UpdateDate { get; set; }
+
     }
 }

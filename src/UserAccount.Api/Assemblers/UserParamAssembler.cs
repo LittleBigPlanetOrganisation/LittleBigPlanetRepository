@@ -37,72 +37,71 @@ namespace UserAccount.Api.Assemblers
             return result;
         }
 
-        internal static UserAccountViewModel ToGetUserAccountByLogin(this UserAccountAllParam userAccountAllParams)
+        internal static UserAccountAllParam ToGetUserAccountByLogin(this UserAccountViewModel userAccountViewModel)
         {
-            if (userAccountAllParams == null)
+            if (userAccountViewModel == null)
             {
                 return null;
             }
-            return new UserAccountViewModel
+            return new UserAccountAllParam
             {
-                IdUser = userAccountAllParams.IdUser,
-                FirstName = userAccountAllParams.FirstName,
-                LastName = userAccountAllParams.LastName,
-                SurName = userAccountAllParams.SurName,
-                Email = userAccountAllParams.Email,
-                PostalAddress = userAccountAllParams.PostalAddress,
-                City = userAccountAllParams.City,
-                Country = userAccountAllParams.Country,
-                PostalCode = userAccountAllParams.PostalCode,
-                Password = userAccountAllParams.Password,
-                UrlPicture = userAccountAllParams.UrlPicture,
-                IsAdmin = userAccountAllParams.IsAdmin
+                IdUser = userAccountViewModel.IdUser,
+                FirstName = userAccountViewModel.FirstName,
+                LastName = userAccountViewModel.LastName,
+                SurName = userAccountViewModel.SurName,
+                Email = userAccountViewModel.Email,
+                PostalAddress = userAccountViewModel.PostalAddress,
+                City = userAccountViewModel.City,
+                Country = userAccountViewModel.Country,
+                PostalCode = userAccountViewModel.PostalCode,
+                Password = userAccountViewModel.Password,
+                UrlPicture = userAccountViewModel.UrlPicture,
+                IsAdmin = userAccountViewModel.IsAdmin
             };
         }
 
-        internal static UserAccountViewModel ToPostUserWhithAllParam (this UserAccountAllParam userAccountAllParams)
+        internal static UserAccountAllParam ToPostUserWhithAllParam(this UserAccountViewModel userAccountViewModel)
         {
-            if (userAccountAllParams == null)
+            if (userAccountViewModel == null)
             {
                 return null;
             }
-            return new UserAccountViewModel
+            return new UserAccountAllParam
             {
-                IdUser = userAccountAllParams.IdUser,
-                FirstName = userAccountAllParams.FirstName,
-                LastName = userAccountAllParams.LastName,
-                SurName = userAccountAllParams.SurName,
-                Email = userAccountAllParams.Email,
-                PostalAddress = userAccountAllParams.PostalAddress,
-                City = userAccountAllParams.City,
-                Country = userAccountAllParams.Country,
-                PostalCode = userAccountAllParams.PostalCode,
-                Password = userAccountAllParams.Password,
-                UrlPicture = userAccountAllParams.UrlPicture,
-                IsAdmin = userAccountAllParams.IsAdmin
+                IdUser = userAccountViewModel.IdUser,
+                FirstName = userAccountViewModel.FirstName,
+                LastName = userAccountViewModel.LastName,
+                SurName = userAccountViewModel.SurName,
+                Email = userAccountViewModel.Email,
+                PostalAddress = userAccountViewModel.PostalAddress,
+                City = userAccountViewModel.City,
+                Country = userAccountViewModel.Country,
+                PostalCode = userAccountViewModel.PostalCode,
+                Password = userAccountViewModel.Password,
+                UrlPicture = userAccountViewModel.UrlPicture,
+                IsAdmin = userAccountViewModel.IsAdmin
             };
         }
 
-        internal static UserAccountViewModel ToUpdateUserAccount(this UserAccountAllParam userAccountAllParams)
+        internal static UserAccountAllParam ToUpdateUserAccount(this UserAccountViewModel userAccountViewModel)
         {
-            if (userAccountAllParams == null)
+            if (userAccountViewModel == null)
             {
                 return null;
             }
-            return new UserAccountViewModel
+            return new UserAccountAllParam
             {
-                IdUser = userAccountAllParams.IdUser,
-                FirstName = userAccountAllParams.FirstName,
-                LastName = userAccountAllParams.LastName,
-                SurName = userAccountAllParams.SurName,
-                Email = userAccountAllParams.Email,
-                PostalAddress = userAccountAllParams.PostalAddress,
-                City = userAccountAllParams.City,
-                Country = userAccountAllParams.Country,
-                PostalCode = userAccountAllParams.PostalCode,
-                Password = userAccountAllParams.Password,
-                UrlPicture = userAccountAllParams.UrlPicture,
-                IsAdmin = userAccountAllParams.IsAdmin
+                FirstName = userAccountViewModel.FirstName,
+                LastName = userAccountViewModel.LastName,
+                SurName = userAccountViewModel.SurName,
+                Email = userAccountViewModel.Email,
+                PostalAddress = userAccountViewModel.PostalAddress,
+                City = userAccountViewModel.City,
+                Country = userAccountViewModel.Country,
+                PostalCode = userAccountViewModel.PostalCode,
+                Password = userAccountViewModel.Password,
+                UrlPicture = userAccountViewModel.UrlPicture,
+                IsAdmin = userAccountViewModel.IsAdmin
             };
         }
     }

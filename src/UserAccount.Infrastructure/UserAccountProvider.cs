@@ -22,12 +22,6 @@ namespace UserAccount.Infrastructure
             UserAccountRepository = new UserAccountRepository(sqlOptions, cache, configuration);
         }
 
-        public async Task UpdateUserAccount(UserAccountAllParam param)
-        {
-            UserAccountAllParamDto dto = param.ToPutUserAccountAllParam();
-            await UserAccountRepository.UpdateUserAccount(dto).ConfigureAwait(false);
-        }
-
         /// <summary>
         /// 
         /// </summary>
@@ -64,6 +58,13 @@ namespace UserAccount.Infrastructure
             UserAccountAllParamDto dto = param.ToPostUserWhithAllParam();
             await UserAccountRepository.CreateUserWhithAllParam(dto).ConfigureAwait(false);
 
+
+        }
+
+        public async Task UpdateUserAccount(UserAccountAllParam param)
+        {
+            UserAccountAllParamDto dto = param.ToPutUserAccountAllParam();
+            await UserAccountRepository.UpdateUserAccount(dto).ConfigureAwait(false);
         }
 
         /// <summary>
