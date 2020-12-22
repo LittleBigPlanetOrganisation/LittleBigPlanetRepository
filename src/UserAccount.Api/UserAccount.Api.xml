@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>UserAccount.Api</name>
+    </assembly>
+    <members>
+        <member name="M:UserAccount.Api.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="F:UserAccount.Api.UserAccountService._userAccountProvider">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:UserAccount.Api.UserAccountService._logger">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:UserAccount.Api.UserAccountService.#ctor(Microsoft.Extensions.Logging.ILogger,UserAccount.Infrastructure.IUserAccountProvider)">
+            <summary>
+            
+            </summary>
+            <param name="logger"></param>
+            <param name="userAccountProvider"></param>
+        </member>
+    </members>
+</doc>

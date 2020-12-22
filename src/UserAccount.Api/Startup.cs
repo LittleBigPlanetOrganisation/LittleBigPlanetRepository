@@ -9,6 +9,12 @@ using Microsoft.Extensions.Options;
 using System;
 using UserAccount.Infrastructure;
 using UserAccount.Infrastructure.Cache;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using Microsoft.OpenApi.Models;
+using System.IO;
+using System.Reflection;
 
 namespace UserAccount.Api
 {
@@ -50,16 +56,30 @@ namespace UserAccount.Api
             });
             services.AddTransient(x => cache);
 
-            //ProviderConfigurationDictionary configurations = new ProviderConfigurationDictionary();
-            //configurations.ProviderConfigurations = GetProvidersConfig();
-            //services.AddTransient(x => configurations);
+            // ProviderConfigurationDictionary configurations = new ProviderConfigurationDictionary();
+            // configurations.ProviderConfigurations = GetProvidersConfig();
+            // services.AddTransient(x => configurations);
 
             services
-                //.AddCustomSwaggerGen<Startup>()
-               // .AddDefaultHttpClient()
+               .AddSwaggerGen(
+                  c =>
+                  {
+                      c.SwaggerDoc("v1", new OpenApiInfo
+                      {
+                          Title = "UserAccount API",
+                          Version = "v1"
+                      });
+                      c.IncludeXmlComments(Path.Combine(
+                          AppContext.BaseDirectory,
+                          $"{ Assembly.GetExecutingAssembly().GetName().Name }.xml"
+                          ));
+                  })
+                //.AddDefaultHttpClient()
                 .AddResponseCompression()
                 .AddDataProtection();
+                
 
+            services.AddControllers();
             services
                 .AddMvcCore()
                 .AddDataAnnotations()
@@ -69,9 +89,8 @@ namespace UserAccount.Api
                 .AddCors();
 
             // Register Domain handler
-            /* services     
-                  .AddSingleton<IUserProvider, UserProvider>();
-                  .AddSingleton<ISupervisorRepository, SupervisorRepository>(); */
+             services     
+                  .AddSingleton<IUserAccountProvider, UserAccountProvider>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -89,9 +108,17 @@ namespace UserAccount.Api
 
             app.UseAuthorization();
 
-            app.UseResponseCompression()
-            //.UseCustomSwagger<Startup>()
-            .UseCors(options => options
+            app.UseResponseCompression();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(
+                c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "userAccount v1");
+                }
+            );
+
+            app.UseCors(options => options
                 .SetIsOriginAllowed(_ => true)
                 .AllowAnyMethod()
                 .AllowAnyHeader()
