@@ -4,6 +4,34 @@
         <name>UserAccount.Api</name>
     </assembly>
     <members>
+        <member name="M:UserAccount.Api.Controllers.UserAccountController.GetuserAccountById(System.Int64)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:UserAccount.Api.Controllers.UserAccountController.GetUserAccountByLogin(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="surName"></param>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UserAccount.Api.Controllers.UserAccountController.CreateUserAccount(UserAccount.Api.ViewModels.UserAccountViewModel)">
+            <summary>
+            
+            </summary>
+            <param name="userAccountViewModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UserAccount.Api.Controllers.UserAccountController.UpdateUserAccount(UserAccount.Api.ViewModels.UserAccountViewModel)">
+            <summary>
+            
+            </summary>
+            <param name="userAccountViewModel"></param>
+            <returns></returns>
+        </member>
         <member name="M:UserAccount.Api.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
             
@@ -26,6 +54,42 @@
             </summary>
             <param name="logger"></param>
             <param name="userAccountProvider"></param>
+        </member>
+        <member name="M:UserAccount.Api.UserAccountService.GetUserAccountListById(System.Int64)">
+            <summary>
+            
+            </summary>
+            <param name="idUser"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UserAccount.Api.UserAccountService.GetUserAccountListByLogin(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="surName"></param>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UserAccount.Api.UserAccountService.PostUserWhithAllParam(UserAccount.Api.ViewModels.UserAccountViewModel)">
+            <summary>
+            
+            </summary>
+            <param name="userAccountViewModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UserAccount.Api.UserAccountService.UpdateUserAccount(UserAccount.Api.ViewModels.UserAccountViewModel)">
+            <summary>
+            
+            </summary>
+            <param name="userAccountViewModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UserAccount.Api.UserAccountService.DeleteUserAccount(System.Int64)">
+            <summary>
+            
+            </summary>
+            <param name="idUser"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

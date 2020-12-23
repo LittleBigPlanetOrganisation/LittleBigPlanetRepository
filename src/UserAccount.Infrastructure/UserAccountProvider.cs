@@ -40,7 +40,7 @@ namespace UserAccount.Infrastructure
         /// <returns></returns>
         public async Task<UserAccountAllParam> GetUserAccountListByLogin(string surName, string password)
         {
-            if (string.IsNullOrEmpty(password) || string.IsNullOrEmpty(surName))
+            if (string.IsNullOrEmpty(surName) || string.IsNullOrEmpty(password))
             {
                 return null;
             }

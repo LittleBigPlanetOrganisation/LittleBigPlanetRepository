@@ -50,22 +50,25 @@ namespace UserAccount.Infrastructure.Repository
             using (var connection = _connection())
             {
                 var parameters = new DynamicParameters();
-                parameters.Add("@idUser", dbType: DbType.Int64, value: param.idUser);
                 parameters.Add("@firstName", dbType: DbType.String, value: param.firstName);
                 parameters.Add("@lastname", dbType: DbType.String, value: param.lastName);
-                parameters.Add("@postalAddress", dbType: DbType.String, value: param.postalAddress);
-                parameters.Add("@postalCode", dbType: DbType.String, value: param.postalCode);
-                parameters.Add("@city", dbType: DbType.String, value: param.city);
-                parameters.Add("@country", dbType: DbType.String, value: param.country);
+                parameters.Add("@surName", dbType: DbType.String, value: param.surName);
                 parameters.Add("@email", dbType: DbType.String, value: param.email);
                 parameters.Add("@password", dbType: DbType.String, value: param.password);
-                parameters.Add("@isAdmin", dbType: DbType.Boolean, value: param.isAdmin);
                 parameters.Add("@urlPicture", dbType: DbType.String, value: param.urlPicture);
-                parameters.Add("@updateDate", dbType: DbType.DateTime, value: DateTime.Now);
-                await connection.QueryAsync(
-                    Constant.StoredProcedure.UserAccount.CreateUserAccount,
-                    parameters,
-                    commandType: CommandType.StoredProcedure).ConfigureAwait(false);
+
+                try
+                {
+                    await connection.ExecuteAsync(
+                        Constant.StoredProcedure.UserAccount.CreateUserAccount,
+                        parameters,
+                        commandType: CommandType.StoredProcedure).ConfigureAwait(false);
+                }
+                catch(Exception e)
+                {
+                    var test = e.Message;
+                }
+
             }
         }
 
@@ -104,23 +107,15 @@ namespace UserAccount.Infrastructure.Repository
                 return null;
             }
             using (var connection = _connection())
-            { 
-                var res = await _cache.GetOrCreateAsync(
-                    string.Format(Constant.Cache.UserAccountKey, idUser),
-                    async entry =>
-                    {
-                        var parameters = new DynamicParameters();
-                        parameters.Add("@idUser", dbType: DbType.Int64, value: idUser);
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@idUser", dbType: DbType.Int64, value: idUser);
 
-                        entry.SetAbsoluteExpiration(TimeSpan.FromMinutes(_configuration.UserAccountExpirationTime));
-                        var result = await connection.QueryAsync<UserAccountAllParamDto>(
-                            Constant.StoredProcedure.UserAccount.GetUserAccount,
+                var res = await connection.QueryAsync<UserAccountAllParamDto>(
+                            Constant.StoredProcedure.UserAccount.GetUserAccountById,
                             parameters,
                             commandType: CommandType.StoredProcedure).ConfigureAwait(false);
-                        entry.Priority = CacheItemPriority.High;
-                        entry.Size = Constant.Cache.UserAccountMediumSize;
-                        return result;
-                    }).ConfigureAwait(false);
+
                 return res;
             }
         }
@@ -133,24 +128,14 @@ namespace UserAccount.Infrastructure.Repository
             }
             using (var connection = _connection())
             {
-                var res = await _cache.GetOrCreateAsync(
-                    string.Format(Constant.Cache.UserAccountKey, surName, password),
-                    async entry =>
-                    {
-                        var parameters = new DynamicParameters();
-                        parameters.Add("@surName", dbType: DbType.Int64, value: surName);
-                        parameters.Add("@password", dbType: DbType.Int64, value: password);
-
-                        entry.SetAbsoluteExpiration(TimeSpan.FromMinutes(_configuration.UserAccountExpirationTime));
-                        var result = await connection.QueryAsync<UserAccountAllParamDto>(
-                            Constant.StoredProcedure.UserAccount.GetUserAccount,
+                var parameters = new DynamicParameters();
+                parameters.Add("@surName", dbType: DbType.String, value: surName);
+                parameters.Add("@password", dbType: DbType.String, value: password);
+                var res = await connection.QueryAsync<UserAccountAllParamDto>(
+                            Constant.StoredProcedure.UserAccount.GetUserAccountByLogin,
                             parameters,
                             commandType: CommandType.StoredProcedure).ConfigureAwait(false);
-                        entry.Priority = CacheItemPriority.High;
-                        entry.Size = Constant.Cache.UserAccountMediumSize;
-                        return result.FirstOrDefault();
-                    }).ConfigureAwait(false);
-                return res;
+                return res.FirstOrDefault();
             }
         }
 
