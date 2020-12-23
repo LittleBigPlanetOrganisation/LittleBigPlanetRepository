@@ -13,19 +13,23 @@ namespace UserAccount.Infrastructure
                 /// <summary>
                 /// 
                 /// </summary>
-                public static readonly string CreateUserAccount = "createUserAccount";
+                public static readonly string CreateUserAccount = "CreateUserAccount";
                 /// <summary>
                 /// 
                 /// </summary>
-                public static readonly string GetUserAccount = "createUserAccount";
+                public static readonly string GetUserAccountById = "GetUserAccountById";
                 /// <summary>
                 /// 
                 /// </summary>
-                public static readonly string SetUserAccount = "createUserAccount";
+                public static readonly string GetUserAccountByLogin = "GetUserAccountByLogin";
                 /// <summary>
                 /// 
                 /// </summary>
-                public static readonly string DeleteUserAccount = "createUserAccount";
+                public static readonly string SetUserAccount = "SetUserAccount";
+                /// <summary>
+                /// 
+                /// </summary>
+                public static readonly string DeleteUserAccount = "DeleteUserAccount";
             }
 
         }
