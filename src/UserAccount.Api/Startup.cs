@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
@@ -36,6 +36,7 @@ namespace UserAccount.Api
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSwaggerGen();
             services
                 .AddHealthChecks()
                 .AddCheck("Default", () => HealthCheckResult.Healthy("OK"))
@@ -59,27 +60,14 @@ namespace UserAccount.Api
             // ProviderConfigurationDictionary configurations = new ProviderConfigurationDictionary();
             // configurations.ProviderConfigurations = GetProvidersConfig();
             // services.AddTransient(x => configurations);
-
-            services
-               .AddSwaggerGen(
-                  c =>
-                  {
-                      c.SwaggerDoc("v1", new OpenApiInfo
-                      {
-                          Title = "UserAccount API",
-                          Version = "v1"
-                      });
-                      c.IncludeXmlComments(Path.Combine(
-                          AppContext.BaseDirectory,
-                          $"{ Assembly.GetExecutingAssembly().GetName().Name }.xml"
-                          ));
-                  })
+            services.AddControllers();
+  
                 //.AddDefaultHttpClient()
-                .AddResponseCompression()
-                .AddDataProtection();
+               // .AddResponseCompression()
+              //  .AddDataProtection();
                 
 
-            services.AddControllers();
+            
             services
                 .AddMvcCore()
                 .AddDataAnnotations()
@@ -95,11 +83,17 @@ namespace UserAccount.Api
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "UserAccountAPI");
+            });
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseBrowserLink();
-                app.UseDeveloperExceptionPage();
+               // app.UseWebApiExceptionHandler();
             }
 
             app.UseHttpsRedirection();
@@ -110,14 +104,6 @@ namespace UserAccount.Api
 
             app.UseResponseCompression();
 
-            app.UseSwagger();
-            app.UseSwaggerUI(
-                c =>
-                {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "userAccount v1");
-                }
-            );
-
             app.UseCors(options => options
                 .SetIsOriginAllowed(_ => true)
                 .AllowAnyMethod()
@@ -127,6 +113,7 @@ namespace UserAccount.Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+               // endpoints.MapHealthChecks();
             });
         }
 

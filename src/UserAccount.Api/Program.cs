@@ -20,7 +20,16 @@ namespace UserAccount.Api
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    ConfigureWebHostBuilder(webBuilder);
                 });
+
+        public static IWebHostBuilder ConfigureWebHostBuilder(IWebHostBuilder webBuilder)
+        {
+            webBuilder
+
+                .UseStartup<Startup>();
+
+            return webBuilder;
+        }
     }
 }
