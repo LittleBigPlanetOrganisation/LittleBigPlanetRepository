@@ -63,7 +63,7 @@ namespace UserAccount.Api
             services.AddControllers();
   
                 //.AddDefaultHttpClient()
-               // .AddResponseCompression()
+                services.AddResponseCompression();
               //  .AddDataProtection();
                 
 
