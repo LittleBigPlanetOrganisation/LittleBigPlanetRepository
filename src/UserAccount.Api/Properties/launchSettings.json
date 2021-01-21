@@ -12,7 +12,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/userAccount",
+      "launchUrl": "api/v1/useraccount",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
@@ -22,7 +22,7 @@
     "UserAccount.Api": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/userAccount",
+      "launchUrl": "api/v1/useraccount",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
