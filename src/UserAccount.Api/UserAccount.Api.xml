@@ -32,6 +32,13 @@
             <param name="userAccountViewModel"></param>
             <returns></returns>
         </member>
+        <member name="M:UserAccount.Api.Controllers.UserAccountController.DeleteUseraccount(System.Int64)">
+            <summary>
+            
+            </summary>
+            <param name="idUser"></param>
+            <returns></returns>
+        </member>
         <member name="M:UserAccount.Api.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
             
