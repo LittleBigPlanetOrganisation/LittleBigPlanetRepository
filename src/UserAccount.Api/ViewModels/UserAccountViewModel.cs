@@ -20,7 +20,7 @@ namespace UserAccount.Api.ViewModels
         public string Password { get; set; }
         public bool IsAdmin { get; set; }
         public string UrlPicture { get; set; }
-        public DateTime UpdateDate { get; set; }
+       // public DateTime UpdateDate { get; set; }
 
     }
 }

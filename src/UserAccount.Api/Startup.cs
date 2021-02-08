@@ -61,9 +61,13 @@ namespace UserAccount.Api
             // configurations.ProviderConfigurations = GetProvidersConfig();
             // services.AddTransient(x => configurations);
             services.AddControllers();
-  
-                //.AddDefaultHttpClient()
-                services.AddResponseCompression();
+            services.AddControllersWithViews()
+            .AddNewtonsoftJson(options =>
+             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
+
+            //.AddDefaultHttpClient()
+            services.AddResponseCompression();
               //  .AddDataProtection();
                 
 

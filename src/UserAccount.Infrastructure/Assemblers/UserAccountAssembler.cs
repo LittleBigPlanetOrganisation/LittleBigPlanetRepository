@@ -85,9 +85,12 @@ namespace UserAccount.Infrastructure.Assemblers
                 email = param.Email,
                 postalAddress = param.PostalAddress,
                 postalCode = param.PostalCode,
+                city = param.City,
                 country = param.Country,
                 urlPicture = param.UrlPicture,
-                isAdmin = param.IsAdmin
+                isAdmin = param.IsAdmin,
+                updateDate = DateTime.Now
+
             };
         }
     }

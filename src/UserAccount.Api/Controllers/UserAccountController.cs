@@ -37,7 +37,7 @@ namespace UserAccount.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Route ("/{idUser}")]
+        [Route ("{idUser}")]
          public async Task<IActionResult> GetuserAccountById([FromRoute][Required] long idUser)
          {
             try
@@ -61,8 +61,9 @@ namespace UserAccount.Api.Controllers
         /// <param name="password"></param>
         /// <returns></returns>
         [HttpGet]
-        [Route("/{surname}/{password}")]
-        public async Task<IActionResult> GetUserAccountByLogin([FromRoute][Required] string surName, string password)
+        [Route("{surName}/{password}")]
+        public async Task<IActionResult> GetUserAccountByLogin([FromRoute][Required] string surName, [FromRoute][Required]
+        string password)
         {
             try
             {
@@ -71,7 +72,7 @@ namespace UserAccount.Api.Controllers
                 {
                     return NotFound();
                 }
-                return Ok();
+                return Ok(result.ToGetUserAccountByLogin());
             }
             catch (Exception e)
             {
@@ -116,6 +117,11 @@ namespace UserAccount.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="idUser"></param>
+        /// <returns></returns>
         [HttpDelete("{idUser}")]
         public async Task<IActionResult> DeleteUseraccount([FromRoute] long idUser)
         {

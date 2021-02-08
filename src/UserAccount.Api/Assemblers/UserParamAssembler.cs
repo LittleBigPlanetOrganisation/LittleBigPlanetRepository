@@ -37,27 +37,28 @@ namespace UserAccount.Api.Assemblers
             return result;
         }
 
-        internal static UserAccountAllParam ToGetUserAccountByLogin(this UserAccountViewModel userAccountViewModel)
+        internal static UserAccountViewModel ToGetUserAccountByLogin(this UserAccountAllParam userAccountAllParams)
         {
-            if (userAccountViewModel == null)
+            if (userAccountAllParams == null)
             {
                 return null;
             }
-            return new UserAccountAllParam
-            {
-                IdUser = userAccountViewModel.IdUser,
-                FirstName = userAccountViewModel.FirstName,
-                LastName = userAccountViewModel.LastName,
-                SurName = userAccountViewModel.SurName,
-                Email = userAccountViewModel.Email,
-                PostalAddress = userAccountViewModel.PostalAddress,
-                City = userAccountViewModel.City,
-                Country = userAccountViewModel.Country,
-                PostalCode = userAccountViewModel.PostalCode,
-                Password = userAccountViewModel.Password,
-                UrlPicture = userAccountViewModel.UrlPicture,
-                IsAdmin = userAccountViewModel.IsAdmin
-            };
+
+                return new UserAccountViewModel
+                {
+                    IdUser = userAccountAllParams.IdUser,
+                    FirstName = userAccountAllParams.FirstName,
+                    LastName = userAccountAllParams.LastName,
+                    SurName = userAccountAllParams.SurName,
+                    Email = userAccountAllParams.Email,
+                    PostalAddress = userAccountAllParams.PostalAddress,
+                    City = userAccountAllParams.City,
+                    Country = userAccountAllParams.Country,
+                    PostalCode = userAccountAllParams.PostalCode,
+                    Password = userAccountAllParams.Password,
+                    UrlPicture = userAccountAllParams.UrlPicture,
+                    IsAdmin = userAccountAllParams.IsAdmin
+                };
         }
 
         internal static UserAccountAllParam ToPostUserWhithAllParam(this UserAccountViewModel userAccountViewModel)
@@ -91,6 +92,7 @@ namespace UserAccount.Api.Assemblers
             }
             return new UserAccountAllParam
             {
+                IdUser = userAccountViewModel.IdUser,
                 FirstName = userAccountViewModel.FirstName,
                 LastName = userAccountViewModel.LastName,
                 SurName = userAccountViewModel.SurName,

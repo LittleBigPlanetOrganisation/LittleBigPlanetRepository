@@ -63,8 +63,9 @@ namespace UserAccount.Infrastructure
 
         public async Task UpdateUserAccount(UserAccountAllParam param)
         {
-            UserAccountAllParamDto dto = param.ToPutUserAccountAllParam();
-            await UserAccountRepository.UpdateUserAccount(dto).ConfigureAwait(false);
+            //UserAccountAllParamDto dto = param.ToPutUserAccountAllParam();
+            await UserAccountRepository.UpdateUserAccount(param.ToPutUserAccountAllParam()).ConfigureAwait(false);
+
         }
 
         /// <summary>

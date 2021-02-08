@@ -85,14 +85,13 @@ namespace UserAccount.Infrastructure.Repository
                 parameters.Add("@firstName", dbType: DbType.String, value: param.firstName);
                 parameters.Add("@lastname", dbType: DbType.String, value: param.lastName);
                 parameters.Add("@surName", dbType: DbType.String, value: param.surName);
-                parameters.Add("@postalAddress", dbType: DbType.String, value: param.postalAddress); // pas dans la proc
-                parameters.Add("@postalCode", dbType: DbType.String, value: param.postalCode);       //  pas dans la proc
-                parameters.Add("@city", dbType: DbType.String, value: param.city);                //   pas dans la proc
-                parameters.Add("@country", dbType: DbType.String, value: param.country);           //  pas dans la proc
                 parameters.Add("@email", dbType: DbType.String, value: param.email);
+                parameters.Add("@postalAddress", dbType: DbType.String, value: param.postalAddress);
+                parameters.Add("@postalCode", dbType: DbType.String, value: param.postalCode);
+                parameters.Add("@city", dbType: DbType.String, value: param.city);
+                parameters.Add("@country", dbType: DbType.String, value: param.country);
                 parameters.Add("@password", dbType: DbType.String, value: param.password);
                 parameters.Add("@urlPicture", dbType: DbType.String, value: param.urlPicture);
-              //  parameters.Add("@updateDate", dbType: DbType.DateTime2, value: DateTime.Now);
                 await connection.QueryAsync(
                     Constant.StoredProcedure.UserAccount.SetUserAccount,
                     parameters,
@@ -122,7 +121,7 @@ namespace UserAccount.Infrastructure.Repository
 
         public async Task<UserAccountAllParamDto> GetUserAccountByLogin(string surName, string password)
         {
-            if (password.Length < 5 || surName.Length <= 0)
+            if (password.Length < 3 || surName.Length <= 0)
             {
                 return null;
             }
@@ -141,19 +140,18 @@ namespace UserAccount.Infrastructure.Repository
 
         public async Task DeleteUserAccount(long idUser)
         {
-            await this.DeleteUserAccount(idUser, Constant.StoredProcedure.UserAccount.DeleteUserAccount)
+            await ExecuteUserAccount(idUser, Constant.StoredProcedure.UserAccount.DeleteUserAccount)
                 .ConfigureAwait(false);
         }
 
-        private async Task DeleteUserAccount(long idUser, string proc)
+        private async Task ExecuteUserAccount(long idUser, string proc)
         {
-            if (idUser < 0)
+            if (idUser > 0)
             {
                 using (var connection = _connection())
                 {
                     var parameters = new DynamicParameters();
                     parameters.Add("@idUser", dbType: DbType.Int64, value: idUser);
-                    parameters.Add("@updateDate", dbType: DbType.DateTime2, value: DateTime.Now);
                     await connection.QueryAsync(
                         proc,
                         parameters,
