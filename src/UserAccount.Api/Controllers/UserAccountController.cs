@@ -37,7 +37,8 @@ namespace UserAccount.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Route ("{idUser}")]
+        //[Route("{idUser}")]
+        [Route ("{idUser}", Name = "GetuserAccountById")]
          public async Task<IActionResult> GetuserAccountById([FromRoute][Required] long idUser)
          {
             try
@@ -47,7 +48,8 @@ namespace UserAccount.Api.Controllers
                 {
                     return NotFound();
                 }
-                return Ok(result.ToGetUserAccountListById());
+                //return Ok(result.ToGetUserAccountListById());
+                return new ObjectResult(result.ToGetUserAccountListById());
             }
             catch (Exception e)
             {
@@ -90,7 +92,8 @@ namespace UserAccount.Api.Controllers
             try
             {
                 await _userAccountService.PostUserWhithAllParam(userAccountViewModel).ConfigureAwait(false);
-                return Ok();
+                //return Ok();
+               return CreatedAtRoute("GetuserAccountById", new UserAccountViewModel { IdUser = userAccountViewModel.IdUser }, userAccountViewModel);
             }
             catch (Exception e)
             {
