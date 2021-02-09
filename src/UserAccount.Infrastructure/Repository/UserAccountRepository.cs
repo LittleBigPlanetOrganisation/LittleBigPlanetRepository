@@ -59,7 +59,7 @@ namespace UserAccount.Infrastructure.Repository
 
                 try
                 {
-                    await connection.ExecuteAsync(
+                    await connection.QueryAsync( //ExecuteAsync
                         Constant.StoredProcedure.UserAccount.CreateUserAccount,
                         parameters,
                         commandType: CommandType.StoredProcedure).ConfigureAwait(false);
