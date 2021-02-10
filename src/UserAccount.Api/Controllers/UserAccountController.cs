@@ -33,8 +33,12 @@ namespace UserAccount.Api.Controllers
             }
         }
         /// <summary>
-        /// 
+        /// Get user by Id
         /// </summary>
+        /// <response code="201">Successfully created</response>
+        /// <response code="400">BadRequest</response>
+        /// <response code="404">NotFound</response>
+        /// <response code="500">Internal Server Error</response>
         /// <returns></returns>
         [HttpGet]
         //[Route("{idUser}")]
@@ -57,10 +61,14 @@ namespace UserAccount.Api.Controllers
             }
          }
         /// <summary>
-        /// 
+        /// Get User Params by surname and password
         /// </summary>
         /// <param name="surName"></param>
         /// <param name="password"></param>
+        /// <response code="201">Successfully created</response>
+        /// <response code="400">BadRequest</response>
+        /// <response code="404">NotFound</response>
+        /// <response code="500">Internal Server Error</response>
         /// <returns></returns>
         [HttpGet]
         [Route("{surName}/{password}")]
@@ -80,11 +88,15 @@ namespace UserAccount.Api.Controllers
             {
                 return StatusCode(500, e);
             }
-        }   
+        }
         /// <summary>
-        /// 
+        /// Create a new user
         /// </summary>
         /// <param name="userAccountViewModel"></param>
+        /// <response code="201">Successfully created</response>
+        /// <response code="400">BadRequest</response>
+        /// <response code="404">NotFound</response>
+        /// <response code="500">Internal Server Error</response>
         /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> CreateUserAccount([FromBody] UserAccountViewModel userAccountViewModel)
@@ -99,12 +111,16 @@ namespace UserAccount.Api.Controllers
             {
                 return StatusCode(500, e);
             }
-        }  
+        }
 
         /// <summary>
-        /// 
+        /// Update user params
         /// </summary>
         /// <param name="userAccountViewModel"></param>
+        /// <response code="201">Successfully created</response>
+        /// <response code="400">BadRequest</response>
+        /// <response code="404">NotFound</response>
+        /// <response code="500">Internal Server Error</response>
         /// <returns></returns>
         [HttpPut]
         public async Task<IActionResult> UpdateUserAccount([FromBody] UserAccountViewModel userAccountViewModel)
@@ -121,9 +137,13 @@ namespace UserAccount.Api.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Delete all user's params
         /// </summary>
         /// <param name="idUser"></param>
+        /// <response code="201">Successfully created</response>
+        /// <response code="400">BadRequest</response>
+        /// <response code="404">NotFound</response>
+        /// <response code="500">Internal Server Error</response>
         /// <returns></returns>
         [HttpDelete("{idUser}")]
         public async Task<IActionResult> DeleteUseraccount([FromRoute] long idUser)

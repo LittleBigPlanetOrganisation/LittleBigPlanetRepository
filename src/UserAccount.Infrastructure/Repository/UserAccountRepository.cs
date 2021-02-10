@@ -54,6 +54,10 @@ namespace UserAccount.Infrastructure.Repository
                 parameters.Add("@lastname", dbType: DbType.String, value: param.lastName);
                 parameters.Add("@surName", dbType: DbType.String, value: param.surName);
                 parameters.Add("@email", dbType: DbType.String, value: param.email);
+                parameters.Add("@postalAddress", dbType: DbType.String, value: param.postalAddress);
+                parameters.Add("@postalCode", dbType: DbType.String, value: param.postalCode);
+                parameters.Add("@city", dbType: DbType.String, value: param.city);
+                parameters.Add("@country", dbType: DbType.String, value: param.country);
                 parameters.Add("@password", dbType: DbType.String, value: param.password);
                 parameters.Add("@urlPicture", dbType: DbType.String, value: param.urlPicture);
 
