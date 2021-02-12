@@ -12,6 +12,7 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lbp.UserAccount.Infrastructure.Tests.Unit", "Lbp.UserAccount.Infrastructure.Tests.Unit\Lbp.UserAccount.Infrastructure.Tests.Unit.csproj", "{B331AAB8-258E-4367-9746-3584BDAA93E4}"
 	ProjectSection(ProjectDependencies) = postProject
 		{13D16C67-AA38-4BB4-9F49-3FF27658BFC6} = {13D16C67-AA38-4BB4-9F49-3FF27658BFC6}
+		{4C9F34F9-4DA1-4BE7-99D5-0E82AF4F6212} = {4C9F34F9-4DA1-4BE7-99D5-0E82AF4F6212}
 	EndProjectSection
 EndProject
 Global
