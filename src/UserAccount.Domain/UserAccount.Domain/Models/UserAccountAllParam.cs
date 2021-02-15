@@ -24,7 +24,7 @@ namespace UserAccount.Domain.UserAccount.Domain.Models
 
 
         public UserAccountAllParam(long idUser, string firstName, string surName, string lastname, string password, string email, string postalAddress,
-            string postalCode, string country, string urlPicture, bool isAdmin, DateTime updateDate)
+            string postalCode,string city, string country, string urlPicture, bool isAdmin, DateTime updateDate)
         {
             IdUser = idUser;
             FirstName = firstName;
@@ -34,6 +34,7 @@ namespace UserAccount.Domain.UserAccount.Domain.Models
             Email = email;
             PostalAddress = postalAddress;
             PostalCode = postalCode;
+            City = city;
             Country = country;
             UrlPicture = urlPicture;
             IsAdmin = isAdmin;

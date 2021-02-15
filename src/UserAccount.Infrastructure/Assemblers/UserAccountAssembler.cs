@@ -18,7 +18,7 @@ namespace UserAccount.Infrastructure.Assemblers
                 foreach (var item in param)
                 {
                     result.Add(new UserAccountAllParam(item.idUser, item.firstName, item.surName, item.lastName, item.password, item.email, item.postalAddress,
-                        item.postalCode, item.country, item.urlPicture, item.isAdmin, item.updateDate));
+                        item.postalCode, item.city, item.country, item.urlPicture, item.isAdmin, item.updateDate));
                 }
             }
             return result;
@@ -40,6 +40,7 @@ namespace UserAccount.Infrastructure.Assemblers
                 Email = param.email,
                 PostalAddress = param.postalAddress,
                 PostalCode = param.postalCode,
+                City = param.city,
                 Country = param.country,
                 UrlPicture = param.urlPicture, 
                 IsAdmin = param.isAdmin 
@@ -63,6 +64,7 @@ namespace UserAccount.Infrastructure.Assemblers
                 email = param.Email,
                 postalAddress = param.PostalAddress,
                 postalCode = param.PostalCode,
+                city = param.City,
                 country = param.Country,
                 urlPicture = param.UrlPicture,
                 isAdmin = param.IsAdmin
