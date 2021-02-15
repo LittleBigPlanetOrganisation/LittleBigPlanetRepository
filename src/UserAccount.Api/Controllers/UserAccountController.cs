@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -33,13 +34,15 @@ namespace UserAccount.Api.Controllers
             }
         }
         /// <summary>
-        /// Get user by Id
+        /// Get user by his Id
         /// </summary>
-        /// <response code="201">Successfully created</response>
+        /// <param name="idUser"></param>
+        /// <response code="200">Success, the user's params has been returned</response>
         /// <response code="400">BadRequest</response>
         /// <response code="404">NotFound</response>
         /// <response code="500">Internal Server Error</response>
-        /// <returns></returns>
+        /// <returns>User by his identifier </returns>
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet]
         //[Route("{idUser}")]
         [Route ("{idUser}", Name = "GetuserAccountById")]
@@ -65,11 +68,12 @@ namespace UserAccount.Api.Controllers
         /// </summary>
         /// <param name="surName"></param>
         /// <param name="password"></param>
-        /// <response code="201">Successfully created</response>
+        /// <response code="200">Success, the user's params has been returned</response>
         /// <response code="400">BadRequest</response>
         /// <response code="404">NotFound</response>
         /// <response code="500">Internal Server Error</response>
-        /// <returns></returns>
+        /// <returns>User by his surname and password</returns>
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet]
         [Route("{surName}/{password}")]
         public async Task<IActionResult> GetUserAccountByLogin([FromRoute][Required] string surName, [FromRoute][Required]
@@ -90,14 +94,15 @@ namespace UserAccount.Api.Controllers
             }
         }
         /// <summary>
-        /// Create a new user
+        /// Create a new user with all params
         /// </summary>
         /// <param name="userAccountViewModel"></param>
-        /// <response code="201">Successfully created</response>
+        /// <response code="201">The new user has been Successfully created</response>
         /// <response code="400">BadRequest</response>
         /// <response code="404">NotFound</response>
         /// <response code="500">Internal Server Error</response>
-        /// <returns></returns>
+        /// <returns>A new user with all params</returns>
+        [ProducesResponseType(StatusCodes.Status201Created)]
         [HttpPost]
         public async Task<IActionResult> CreateUserAccount([FromBody] UserAccountViewModel userAccountViewModel)
         {
@@ -114,14 +119,15 @@ namespace UserAccount.Api.Controllers
         }
 
         /// <summary>
-        /// Update user params
+        /// Update the user's params
         /// </summary>
         /// <param name="userAccountViewModel"></param>
-        /// <response code="201">Successfully created</response>
+        /// <response code="200">Success, the user's params has been updated</response>
         /// <response code="400">BadRequest</response>
         /// <response code="404">NotFound</response>
         /// <response code="500">Internal Server Error</response>
-        /// <returns></returns>
+        /// <returns>the user's new params</returns>
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpPut]
         public async Task<IActionResult> UpdateUserAccount([FromBody] UserAccountViewModel userAccountViewModel)
         {
@@ -140,11 +146,12 @@ namespace UserAccount.Api.Controllers
         /// Delete all user's params
         /// </summary>
         /// <param name="idUser"></param>
-        /// <response code="201">Successfully created</response>
+        /// <response code="200">Success, the user's params has been deleted</response>
         /// <response code="400">BadRequest</response>
         /// <response code="404">NotFound</response>
         /// <response code="500">Internal Server Error</response>
-        /// <returns></returns>
+        /// <returns>void</returns>
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpDelete("{idUser}")]
         public async Task<IActionResult> DeleteUseraccount([FromRoute] long idUser)
         {
@@ -161,8 +168,6 @@ namespace UserAccount.Api.Controllers
             {
                 return StatusCode(500, e);
             }
-            //test pipeline
-            // diaihaiohâà$çàar$çàa
         }
     }
 }   

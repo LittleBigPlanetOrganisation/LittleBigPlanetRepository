@@ -36,7 +36,22 @@ namespace UserAccount.Api
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSwaggerGen();
+            services.AddSwaggerGen(
+                c =>
+                {
+                    c.SwaggerDoc("v1", new OpenApiInfo
+                    {
+                        Title = "UserAccountAPI",
+                        Version = "v1",
+                        Description = "The UserAccount API  allows you to manage a list of users."
+
+                    });
+                    c.IncludeXmlComments(Path.Combine(
+                        AppContext.BaseDirectory,
+                        $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"
+                            ));
+                });
+
             services
                 .AddHealthChecks()
                 .AddCheck("Default", () => HealthCheckResult.Healthy("OK"))

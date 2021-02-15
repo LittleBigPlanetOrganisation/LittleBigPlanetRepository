@@ -6,13 +6,14 @@
     <members>
         <member name="M:UserAccount.Api.Controllers.UserAccountController.GetuserAccountById(System.Int64)">
             <summary>
-            Get user by Id
+            Get user by his Id
             </summary>
-            <response code="201">Successfully created</response>
+            <param name="idUser"></param>
+            <response code="200">Success, the user's params has been returned</response>
             <response code="400">BadRequest</response>
             <response code="404">NotFound</response>
             <response code="500">Internal Server Error</response>
-            <returns></returns>
+            <returns>User by his identifier </returns>
         </member>
         <member name="M:UserAccount.Api.Controllers.UserAccountController.GetUserAccountByLogin(System.String,System.String)">
             <summary>
@@ -20,44 +21,44 @@
             </summary>
             <param name="surName"></param>
             <param name="password"></param>
-            <response code="201">Successfully created</response>
+            <response code="200">Success, the user's params has been returned</response>
             <response code="400">BadRequest</response>
             <response code="404">NotFound</response>
             <response code="500">Internal Server Error</response>
-            <returns></returns>
+            <returns>User by his surname and password</returns>
         </member>
         <member name="M:UserAccount.Api.Controllers.UserAccountController.CreateUserAccount(UserAccount.Api.ViewModels.UserAccountViewModel)">
             <summary>
-            Create a new user
+            Create a new user with all params
             </summary>
             <param name="userAccountViewModel"></param>
-            <response code="201">Successfully created</response>
+            <response code="201">The new user has been Successfully created</response>
             <response code="400">BadRequest</response>
             <response code="404">NotFound</response>
             <response code="500">Internal Server Error</response>
-            <returns></returns>
+            <returns>A new user with all params</returns>
         </member>
         <member name="M:UserAccount.Api.Controllers.UserAccountController.UpdateUserAccount(UserAccount.Api.ViewModels.UserAccountViewModel)">
             <summary>
-            Update user params
+            Update the user's params
             </summary>
             <param name="userAccountViewModel"></param>
-            <response code="201">Successfully created</response>
+            <response code="200">Success, the user's params has been updated</response>
             <response code="400">BadRequest</response>
             <response code="404">NotFound</response>
             <response code="500">Internal Server Error</response>
-            <returns></returns>
+            <returns>the user's new params</returns>
         </member>
         <member name="M:UserAccount.Api.Controllers.UserAccountController.DeleteUseraccount(System.Int64)">
             <summary>
             Delete all user's params
             </summary>
             <param name="idUser"></param>
-            <response code="201">Successfully created</response>
+            <response code="200">Success, the user's params has been deleted</response>
             <response code="400">BadRequest</response>
             <response code="404">NotFound</response>
             <response code="500">Internal Server Error</response>
-            <returns></returns>
+            <returns>void</returns>
         </member>
         <member name="M:UserAccount.Api.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
@@ -117,6 +118,78 @@
             </summary>
             <param name="idUser"></param>
             <returns></returns>
+        </member>
+        <member name="P:UserAccount.Api.ViewModels.UserAccountViewModel.IdUser">
+            <summary>
+            idUser
+            </summary>
+            <exemple>1</exemple>
+        </member>
+        <member name="P:UserAccount.Api.ViewModels.UserAccountViewModel.FirstName">
+            <summary>
+            Firstname of the user
+            </summary>
+            <exemple>Sarah</exemple>
+        </member>
+        <member name="P:UserAccount.Api.ViewModels.UserAccountViewModel.LastName">
+            <summary>
+            Lastname of the contact
+            </summary>
+            <exemple>Croche</exemple>
+        </member>
+        <member name="P:UserAccount.Api.ViewModels.UserAccountViewModel.SurName">
+            <summary>
+            Surname of the contact
+            </summary>
+            <exemple>Dring</exemple>
+        </member>
+        <member name="P:UserAccount.Api.ViewModels.UserAccountViewModel.PostalAddress">
+            <summary>
+            The postal adress of the contact
+            </summary>
+            <exemple>1 rue du metal</exemple>
+        </member>
+        <member name="P:UserAccount.Api.ViewModels.UserAccountViewModel.PostalCode">
+            <summary>
+            The postal code 
+            </summary>
+            <exemple>33000</exemple>
+        </member>
+        <member name="P:UserAccount.Api.ViewModels.UserAccountViewModel.City">
+            <summary>
+            city
+            </summary>
+            <exemple>Bordeaux</exemple>
+        </member>
+        <member name="P:UserAccount.Api.ViewModels.UserAccountViewModel.Country">
+            <summary>
+            country
+            </summary>
+            <exemple>France</exemple>
+        </member>
+        <member name="P:UserAccount.Api.ViewModels.UserAccountViewModel.Email">
+            <summary>
+            The email adress of the contact
+            </summary>
+            <exemple>sarahcroche@gmail.com</exemple>
+        </member>
+        <member name="P:UserAccount.Api.ViewModels.UserAccountViewModel.Password">
+            <summary>
+            The password whitch use the user to log on
+            </summary>
+            <exemple>sarah123</exemple>
+        </member>
+        <member name="P:UserAccount.Api.ViewModels.UserAccountViewModel.IsAdmin">
+            <summary>
+            if the contact is admin of the application
+            </summary>
+            <exemple>True</exemple>
+        </member>
+        <member name="P:UserAccount.Api.ViewModels.UserAccountViewModel.UrlPicture">
+            <summary>
+            the profil picture of the user
+            </summary>
+            <exemple>htttpmypicture</exemple>
         </member>
     </members>
 </doc>
