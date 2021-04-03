@@ -25,33 +25,10 @@ namespace UserAccount.Api
         private readonly IHostEnvironment _environment;
         private const int CacheMemorySize = 350000000;
 
-        //   public IConfiguration Configuration { get; }
-        //   public IWebHostEnvironment Env { get; }
-
         public Startup(IHostEnvironment environment, IConfiguration configuration)
         {
             _environment = environment ?? throw new ArgumentNullException(nameof(environment));
-            // _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
-
-            //connectionStrings
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(_environment.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{_environment.EnvironmentName}.json", optional: true)
-                .AddEnvironmentVariables();
-            _configuration = builder.Build();
-        }
-        // variable d'environnement stockée sur azure
-        private string GetConnectionString(string connectionString)
-        {
-            if (_environment.IsDevelopment())
-            {
-                return StartupConstantDev.ConnectionString;
-            }
-            else
-            {
-                return new Uri(Environment.GetEnvironmentVariable(connectionString)).ToString();
-            }
+            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
 
         /// <summary>
@@ -80,11 +57,11 @@ namespace UserAccount.Api
                 .AddHealthChecks()
                 .AddCheck("Default", () => HealthCheckResult.Healthy("OK"))
             ;
+
             var options = Options.Create(new DbClientOptions
             {
-                LittleBigPlanetData = () => new SqlConnection(GetConnectionString("DATABASE_URL"))
+                LittleBigPlanetData = () => new SqlConnection(_configuration.GetConnectionString("LittleBigPlanetData")),
             });
-            
             services.AddTransient(x => options);
 
             CacheConfiguration cache = new CacheConfiguration();
@@ -107,7 +84,10 @@ namespace UserAccount.Api
 
             //.AddDefaultHttpClient()
             services.AddResponseCompression();
-            // .AddDataProtection();          
+            //  .AddDataProtection();
+
+
+
             services
                 .AddMvcCore()
                 .AddDataAnnotations()
@@ -118,7 +98,7 @@ namespace UserAccount.Api
 
             // Register Domain handler
             services
-                .AddSingleton<IUserAccountProvider, UserAccountProvider>();
+                 .AddSingleton<IUserAccountProvider, UserAccountProvider>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
