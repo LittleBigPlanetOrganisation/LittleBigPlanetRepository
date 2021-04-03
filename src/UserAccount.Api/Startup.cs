@@ -15,6 +15,7 @@ using System.Linq;
 using Microsoft.OpenApi.Models;
 using System.IO;
 using System.Reflection;
+using UserAccount.Infrastructure.Repository;
 
 namespace UserAccount.Api
 {
@@ -22,7 +23,7 @@ namespace UserAccount.Api
     {
         private readonly IConfiguration _configuration;
         private readonly IHostEnvironment _environment;
-         private const int CacheMemorySize = 350000000;
+        private const int CacheMemorySize = 350000000;
 
         public Startup(IHostEnvironment environment, IConfiguration configuration)
         {
@@ -83,21 +84,21 @@ namespace UserAccount.Api
 
             //.AddDefaultHttpClient()
             services.AddResponseCompression();
-              //  .AddDataProtection();
-                
+            //  .AddDataProtection();
 
-            
+
+
             services
                 .AddMvcCore()
                 .AddDataAnnotations()
                 .AddAuthorization()
                 .AddApiExplorer()
-               // .AddUnifiedRestApi()
+                // .AddUnifiedRestApi()
                 .AddCors();
 
             // Register Domain handler
-             services     
-                  .AddSingleton<IUserAccountProvider, UserAccountProvider>();
+            services
+                 .AddSingleton<IUserAccountProvider, UserAccountProvider>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -112,7 +113,7 @@ namespace UserAccount.Api
             {
                 app.UseDeveloperExceptionPage();
                 app.UseBrowserLink();
-               // app.UseWebApiExceptionHandler();
+                // app.UseWebApiExceptionHandler();
             }
 
             app.UseHttpsRedirection();
@@ -132,7 +133,7 @@ namespace UserAccount.Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-               // endpoints.MapHealthChecks();
+                // endpoints.MapHealthChecks();
             });
         }
 

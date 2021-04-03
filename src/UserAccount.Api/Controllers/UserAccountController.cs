@@ -12,7 +12,7 @@ using UserAccount.Infrastructure;
 
 namespace UserAccount.Api.Controllers
 {
-    [ApiController]
+    [ApiController] // valide le model
     [Route("[controller]")]
     public class UserAccountController : ControllerBase
     {
@@ -93,6 +93,7 @@ namespace UserAccount.Api.Controllers
                 return StatusCode(500, e);
             }
         }
+
         /// <summary>
         /// Create a new user with all params
         /// </summary>
@@ -112,6 +113,7 @@ namespace UserAccount.Api.Controllers
                 //return Ok();
                return CreatedAtRoute("GetuserAccountById", new UserAccountViewModel { IdUser = userAccountViewModel.IdUser }, userAccountViewModel);
             }
+            // nameOf : passer le parametre de la route sans ecrire une chaine de caractere en dur
             catch (Exception e)
             {
                 return StatusCode(500, e);

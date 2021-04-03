@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Product>UserAccount - Api - Swagger</Product>
     <Description>The UserAccount API  allows you to **manage a list of users**.</Description>
+    <UserSecretsId>5a354e7b-60c7-4590-902a-de4b7aa2cd33</UserSecretsId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
