@@ -118,7 +118,7 @@ namespace UserAccount.Api.Controllers
             {
                 return StatusCode(500, e);
             }
-        }
+        } //test
 
         /// <summary>
         /// Update the user's params
