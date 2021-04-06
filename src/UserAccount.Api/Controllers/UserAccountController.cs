@@ -117,7 +117,6 @@ namespace UserAccount.Api.Controllers
             catch (Exception e)
             {
                 return StatusCode(500, e);
-                //testeuhuoigiuguimguigmiogiomhoùhùujoçuuh hoihio
             }
         }
 
