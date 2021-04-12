@@ -38,11 +38,13 @@ namespace Lbp.UserAccount.Infrastructure.Tests.Unit
         [Fact]
         public async void GetUserAccountById_Return_NotFound()
         {           
+            //Arange
             _mockUserAccountProvider.Setup(x => x.GetUserAccountListById(It.IsAny<long>())).Returns(Task.FromResult((IEnumerable<UserAccountAllParam>)null));
 
             //Act
             var result = await _controller.GetuserAccountById(1).ConfigureAwait(false);
-
+            
+            //Assert
             Assert.NotNull(result);
             Assert.IsType<NotFoundResult>(result);
         }
@@ -50,11 +52,13 @@ namespace Lbp.UserAccount.Infrastructure.Tests.Unit
         [Fact]
         public async void GetUserAccountById_Return_500()
         {
+            //Arange
             _mockUserAccountProvider.Setup(x => x.GetUserAccountListById(It.IsAny<long>())).Throws(new Exception());
 
             //Act
             var result = await _controller.GetuserAccountById(1).ConfigureAwait(false);
 
+            //Assert
             Assert.NotNull(result);
             var response = (ObjectResult)result;
             Assert.Equal(500, response.StatusCode);

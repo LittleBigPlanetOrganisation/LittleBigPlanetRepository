@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,6 +13,7 @@ using UserAccount.Infrastructure;
 
 namespace UserAccount.Api.Controllers
 {
+    [EnableCors("Policy1")]
     [ApiController] // valide le model
     [Route("[controller]")]
     public class UserAccountController : ControllerBase
