@@ -62,6 +62,7 @@ namespace UserAccount.Api
             {
                 LittleBigPlanetData = () => new SqlConnection(_configuration.GetConnectionString("LittleBigPlanetData")),
             });
+
             services.AddTransient(x => options);
 
             CacheConfiguration cache = new CacheConfiguration();
@@ -76,11 +77,10 @@ namespace UserAccount.Api
             // ProviderConfigurationDictionary configurations = new ProviderConfigurationDictionary();
             // configurations.ProviderConfigurations = GetProvidersConfig();
             // services.AddTransient(x => configurations);
-            services.AddControllers();
-            services.AddControllersWithViews()
-            .AddNewtonsoftJson(options =>
-             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-                );
+            services.AddControllersWithViews();
+            //.AddNewtonsoftJson(options =>
+            // options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            //    );
 
             //.AddDefaultHttpClient()
             services.AddResponseCompression();
@@ -94,7 +94,17 @@ namespace UserAccount.Api
                 .AddAuthorization()
                 .AddApiExplorer()
                 // .AddUnifiedRestApi()
-                .AddCors();
+                .AddCors(options =>
+                {
+                    options.AddPolicy("Policy1",
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:3000/inscription", "http://localhost:3000")
+                 .AllowAnyHeader()
+                 .AllowAnyMethod();
+                    });
+                });
+            services.AddControllers();
 
             // Register Domain handler
             services
@@ -116,19 +126,15 @@ namespace UserAccount.Api
                 // app.UseWebApiExceptionHandler();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
-            app.UseAuthorization();
-
             app.UseResponseCompression();
 
-            app.UseCors(options => options
-                .SetIsOriginAllowed(_ => true)
-                .AllowAnyMethod()
-                .AllowAnyHeader()
-                .AllowCredentials());
+            app.UseCors();
+
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
@@ -136,19 +142,5 @@ namespace UserAccount.Api
                 // endpoints.MapHealthChecks();
             });
         }
-
-        // //////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        public IConfiguration Configuration { get; }
-        // This method gets called by the runtime. Use this method to add services to the container.
-        //public void ConfigureServices(IServiceCollection services)
-        //{
-        //    services.AddControllers();
-        //}
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-
-
-        // ////////////////////////////////////////////////ytyryryrtyrtyrt
     }
 }

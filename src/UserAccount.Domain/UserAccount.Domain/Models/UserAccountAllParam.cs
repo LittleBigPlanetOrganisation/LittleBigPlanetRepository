@@ -5,7 +5,7 @@ using UserAccount.Domain.Common.Model;
 
 namespace UserAccount.Domain.UserAccount.Domain.Models
 {
-   public class UserAccountAllParam //: ValueObject
+   public class UserAccountAllParam
     {
 
         public long IdUser { get; set; }
