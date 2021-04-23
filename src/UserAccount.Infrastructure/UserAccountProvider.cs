@@ -58,7 +58,6 @@ namespace UserAccount.Infrastructure
             UserAccountAllParamDto dto = param.ToPostUserWhithAllParam();
             await UserAccountRepository.CreateUserWhithAllParam(dto).ConfigureAwait(false);
 
-
         }
 
         public async Task UpdateUserAccount(UserAccountAllParam param)
