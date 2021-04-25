@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using UserAccount.Api.Assemblers;
 using UserAccount.Api.ViewModels;
 using UserAccount.Infrastructure;
+using BC = BCrypt.Net.BCrypt;
 
 namespace UserAccount.Api.Controllers
 {
@@ -111,6 +112,7 @@ namespace UserAccount.Api.Controllers
         {
             try
             {
+                userAccountViewModel.Password = BC.HashPassword(userAccountViewModel.Password);
                 await _userAccountService.PostUserWhithAllParam(userAccountViewModel).ConfigureAwait(false);
                 //return Ok();
                return CreatedAtRoute("GetuserAccountById", new UserAccountViewModel { IdUser = userAccountViewModel.IdUser }, userAccountViewModel);
